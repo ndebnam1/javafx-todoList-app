@@ -105,7 +105,7 @@ public class CreateListController {
         List<HBox> hboxList = taskListContainer.getChildren().stream()
                 .filter(node -> node instanceof HBox)
                 .map(node -> (HBox) node)
-                .limit(taskListContainer.getChildren().size() - 2)
+                .limit(taskListContainer.getChildren().size() - 3)
                 .collect(Collectors.toList());
 
         for (HBox hbox : hboxList) {
