@@ -73,10 +73,7 @@ public class PrimaryController implements Initializable {
         try {
             loadLists();
             displayLists();
-            while (selectedCard != null) {
-                editBtn.setDisable(false);
-                deleteBtn.setDisable(false);
-            }
+             
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,6 +126,8 @@ public class PrimaryController implements Initializable {
     
     public void displayLists() {
         listContainer.getChildren().clear(); // Clear previous items
+        listContainer.setPadding(new Insets(25));
+        listContainer.setAlignment(javafx.geometry.Pos.CENTER);
         for (ToDoList list : lists) {
         VBox card = new VBox(10);
         card.setPadding(new Insets(15));
