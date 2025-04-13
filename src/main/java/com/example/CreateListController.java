@@ -17,6 +17,8 @@ public class CreateListController {
     @FXML
     private VBox taskListContainer;
     @FXML
+    private TextField tagField;
+    @FXML
     private TextField listNameField;
     @FXML
     private Button createListButton;
@@ -68,6 +70,8 @@ public class CreateListController {
     private void handleCreateList() {
         ToDoList list = new ToDoList();
         String listName = listNameField.getText();
+        String tag = tagField.getText();
+        list.setTag(tag);
         list.setName(listName);
         LocalDate dateCreated = LocalDate.now();
         list.setDate(dateCreated);
@@ -102,6 +106,7 @@ public class CreateListController {
         
         ToDoList list = new ToDoList();
         list.setName(listNameField.getText());
+        list.setTag(tagField.getText());
         List<HBox> hboxList = taskListContainer.getChildren().stream()
                 .filter(node -> node instanceof HBox)
                 .map(node -> (HBox) node)
@@ -110,8 +115,6 @@ public class CreateListController {
 
         for (HBox hbox : hboxList) {
             ListEntry entry = new ListEntry();
-            // Process each HBox as needed
-            //System.out.println("Processing HBox: " + hbox);
             entry.isComplete = ((CheckBox) hbox.getChildren().get(0)).isSelected();
             entry.text = ((TextField) hbox.getChildren().get(1)).getText();
             list.addItem(entry);
