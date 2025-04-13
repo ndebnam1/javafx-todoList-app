@@ -41,6 +41,10 @@ public class ToDoList {
         this.tag = tag;
     }
 
+    public String getTag() {
+        return this.tag;
+    }
+
     public void setDate(LocalDate date) {
         this.dateCreated = date;
     }

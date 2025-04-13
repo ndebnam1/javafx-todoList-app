@@ -14,12 +14,26 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Label text="List Name:">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <TextField fx:id="listNameField" maxWidth="150.0" promptText="Enter list name..." />
+      <HBox alignment="CENTER" maxHeight="25.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" prefWidth="150.0" text="List Name:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="150.0" prefWidth="150.0" text="List Tag:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" fillHeight="false" maxHeight="30.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="listNameField" maxWidth="150.0" promptText="Enter list name..." />
+            <TextField maxHeight="-Infinity" promptText="Enter list tag#" />
+         </children>
+      </HBox>
       <VBox fx:id="taskListContainer" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
             <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="100.0" spacing="10.0">

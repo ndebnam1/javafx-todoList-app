@@ -154,8 +154,12 @@ public class PrimaryController implements Initializable {
         });
         
         Label listName = new Label(list.getName());
+        Label listTag = new Label(list.getTag());
+
         card.getChildren().add(listName);
+        card.getChildren().add(listTag);
         listName.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;");
+        listTag.setStyle("-fx-font-size: 14px; -fx-text-fill: #666;");
         
         Label itemCount = new Label(list.getEntries().size() + " items");
         
