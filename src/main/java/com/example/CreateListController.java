@@ -30,28 +30,28 @@ public class CreateListController {
 
     @FXML
     private void handleAddTask() {
-        // Create new HBox for task entry
+        // create new HBox for task entry
         HBox newTaskEntry = new HBox(10); // 10px spacing between elements
         newTaskEntry.setAlignment(javafx.geometry.Pos.CENTER);
 
-        // Create CheckBox
+        // create CheckBox
         CheckBox checkBox = new CheckBox();
         checkBox.setPrefSize(20, 20); // Optional: Set checkbox size
 
-        // Create TextField for task entry
+        // create TextField for task entry
         TextField textField = new TextField();
         textField.setPrefWidth(300);
         textField.setMinWidth(300);
         textField.setPromptText("Enter task...");
 
-        // Create Delete Button
+        // create Delete Button
         Button deleteButton = new Button("-");
         deleteButton.setOnAction(e -> taskListContainer.getChildren().remove(newTaskEntry));
 
-        // Add CheckBox, TextField, and Delete Button to HBox
+        // add CheckBox, TextField, and Delete Button to HBox
         newTaskEntry.getChildren().addAll(checkBox, textField, deleteButton);
 
-        // Add new task entry to VBox
+        // add new task entry to VBox
         taskListContainer.getChildren().add(taskListContainer.getChildren().size() - 3, newTaskEntry);
 
     }
