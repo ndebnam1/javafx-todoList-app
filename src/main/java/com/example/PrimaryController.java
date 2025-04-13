@@ -50,7 +50,7 @@ public class PrimaryController implements Initializable {
 
     // used to read the content of the txt file and parse it into a ToDoList
     public void loadLists() throws IOException {
-        Path pathTOToDoLists = Paths.get("todolist_files"); 
+        Path pathTOToDoLists = Paths.get("todolist_files");
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(pathTOToDoLists, "*.txt")) {
             for (Path filePath : stream) {
@@ -75,14 +75,17 @@ public class PrimaryController implements Initializable {
         tagField.textProperty().addListener((observable, oldValue, newValue) -> {
             displayLists();
         });
+
+
         try {
             loadLists();
-
             displayLists();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+              
     }
 
     public ToDoList parseClass(String input) {
@@ -133,6 +136,7 @@ public class PrimaryController implements Initializable {
         listContainer.getChildren().clear();
         listContainer.setPadding(new Insets(25));
         listContainer.setAlignment(javafx.geometry.Pos.CENTER);
+        
         String searchQuery = (tagField != null && tagField.getText() != null) ? tagField.getText().trim().toLowerCase()
                 : "";
 
@@ -151,11 +155,12 @@ public class PrimaryController implements Initializable {
             card.setMaxWidth(300);
             card.setOnMouseClicked(event -> {
 
-
                 if (card.equals(selectedCard)) {
                     card.setStyle(
                             "-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4); -fx-cursor: hand;");
                     selectedCard = null;
+                    editBtn.setDisable(true);
+                    deleteBtn.setDisable(true);
                 } else {
                     if (selectedCard != null) {
                         selectedCard.setStyle(
@@ -167,6 +172,8 @@ public class PrimaryController implements Initializable {
                             "-fx-background-color: #cce5ff; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 6); -fx-cursor: hand;");
 
                     System.out.println("Card: " + list);
+                    editBtn.setDisable(false);
+                    deleteBtn.setDisable(false);
                 }
             });
 
@@ -180,9 +187,6 @@ public class PrimaryController implements Initializable {
 
             Label itemCount = new Label(list.getEntries().size() + " items");
 
-            HBox actions = new HBox(10);
-            Button viewButton = new Button("View");
-            Button deleteButton = new Button("Delete");
             LinkedHashSet<ListEntry> entries = list.getEntries();
             for (ListEntry entry : entries) {
                 System.out.println(entry.text + " - " + (entry.isComplete ? "Completed" : "Pending"));
@@ -201,13 +205,15 @@ public class PrimaryController implements Initializable {
             Label items = new Label(s);
             items.setStyle("-fx-font-size: 14px; -fx-text-fill: #333;");
 
-            actions.getChildren().addAll(viewButton, deleteButton);
-
             listContainer.getChildren().add(card);
         }
+        boolean isCardSelected = selectedCard != null;
+        editBtn.setDisable(!isCardSelected);
+        deleteBtn.setDisable(!isCardSelected);
+
     }
 
-   public void handleDelete(){
+    public void handleDelete() {
         if (selectedCard != null) {
             listContainer.getChildren().remove(selectedCard);
             selectedCard = null;
