@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.chart.BubbleChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -214,10 +218,36 @@ public class PrimaryController implements Initializable {
     }
 
     public void handleDelete() {
+        String listName = null;
         if (selectedCard != null) {
             listContainer.getChildren().remove(selectedCard);
+            listName = ((Label) selectedCard.getChildren().get(0)).getText();
+            showDeleteConfirmation(listName);
             selectedCard = null;
         }
     }
+
+    
+    public void showDeleteConfirmation(String listName) {
+        Path pathToToDoLists = Paths.get("todolist_files");
+    File file = new File(pathToToDoLists.toString(), listName + ".txt");
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Deletion");
+    alert.setHeaderText(null); // optional
+    alert.setContentText("Are you sure you want to delete the list \"" + listName + "\"?");
+
+    // Show the alert and wait for user response
+    Optional<ButtonType> result = alert.showAndWait();
+
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        file.delete();
+        editBtn.setDisable(true);
+        deleteBtn.setDisable(true);
+         
+
+    } else {
+        displayLists();
+    }
+}
 
 }
