@@ -240,7 +240,7 @@ public class PrimaryController implements Initializable {
             Stage stage = (Stage) editBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-            
+             
         }
 
     }

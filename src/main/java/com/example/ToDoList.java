@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 
-
 public class ToDoList {
     public String name;
     public LocalDate dateCreated;
@@ -76,8 +75,38 @@ public class ToDoList {
         if (!folder.exists()) {
             folder.mkdir();
         }
+
         File file = new File(folder, name + ".txt");
-        try(FileWriter writer = new FileWriter(file)){
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(this.toString());
+            System.out.println("File saved: " + file.getAbsolutePath());
+        } catch (Exception e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
+
+    public void saveToFile(String originalName) {
+        String dirPath = "todolist_files";
+        File folder = new File(dirPath);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        // Handle renaming: if the name has changed, delete the old file
+          if (originalName != null && !originalName.equals(this.name)) {
+        File oldFile = new File(folder, originalName + ".txt");
+        if (oldFile.exists()) {
+            boolean deleted = oldFile.delete();
+            if (deleted) {
+                System.out.println("Deleted old file: " + oldFile.getAbsolutePath());
+            } else {
+                System.out.println("Failed to delete old file: " + oldFile.getAbsolutePath());
+            }
+        }
+    }
+
+        File file = new File(folder, this.name + ".txt");
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write(this.toString());
             System.out.println("File saved: " + file.getAbsolutePath());
         } catch (Exception e) {
@@ -87,17 +116,10 @@ public class ToDoList {
 
     @Override
     public String toString() {
-        return  "name: " + name + "\n" +
+        return "name: " + name + "\n" +
                 "tag: " + tag + "\n" +
                 "dateCreated: " + dateCreated + "\n" +
                 "items: " + "\n" + getItems() + "\n";
     }
-
-
-    
-
-
-
-
 
 }

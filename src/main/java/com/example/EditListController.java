@@ -12,7 +12,10 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -71,7 +74,7 @@ public class EditListController implements Initializable {
 
         // add new task entry to VBox
         taskListContainer.getChildren().add(taskListContainer.getChildren().size() - 3, newTaskEntry);
-        Stage stage = (Stage)taskListContainer.getScene().getWindow();
+        Stage stage = (Stage) taskListContainer.getScene().getWindow();
         stage.sizeToScene(); // dynamically resize the window to fit the content
 
     }
@@ -94,9 +97,13 @@ public class EditListController implements Initializable {
             entry.text = ((TextField) hbox.getChildren().get(1)).getText();
             list.addItem(entry);
         }
-        list.saveToFile();
+        list.saveToFile(fileName);
         System.out.println(list);
-        App.setRoot("primaryMenu");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("primaryMenu.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 
@@ -111,38 +118,42 @@ public class EditListController implements Initializable {
         tagField.setText(list.getTag());
         int entryCount = list.getEntries().size();
         for (ListEntry entry : list.getEntries()) {
-            
-         HBox newTaskEntry = new HBox(10); // 10px spacing between elements
-        newTaskEntry.setAlignment(javafx.geometry.Pos.CENTER);
 
-        // create CheckBox
-        CheckBox checkBox = new CheckBox();
-        checkBox.setSelected(entry.isComplete);
-        checkBox.setPrefSize(20, 20); // Optional: Set checkbox size
+            HBox newTaskEntry = new HBox(10); // 10px spacing between elements
+            newTaskEntry.setAlignment(javafx.geometry.Pos.CENTER);
 
-        // create TextField for task entry
-        TextField textField = new TextField();
-        textField.setText(entry.text);
-        textField.setPrefWidth(300);
-        textField.setMinWidth(300);
-        textField.setPromptText("Enter task...");
+            // create CheckBox
+            CheckBox checkBox = new CheckBox();
+            checkBox.setSelected(entry.isComplete);
+            checkBox.setPrefSize(20, 20); // Optional: Set checkbox size
 
-        // create Delete Button
-        Button deleteButton = new Button("-");
-        deleteButton.setOnAction(e -> taskListContainer.getChildren().remove(newTaskEntry));
+            // create TextField for task entry
+            TextField textField = new TextField();
+            textField.setText(entry.text);
+            textField.setPrefWidth(300);
+            textField.setMinWidth(300);
+            textField.setPromptText("Enter task...");
 
-        // add CheckBox, TextField, and Delete Button to HBox
-        newTaskEntry.getChildren().addAll(checkBox, textField, deleteButton);
+            // create Delete Button
+            Button deleteButton = new Button("-");
+            deleteButton.setOnAction(e -> taskListContainer.getChildren().remove(newTaskEntry));
 
-        // add new task entry to VBox
-        taskListContainer.getChildren().add(taskListContainer.getChildren().size() - 3, newTaskEntry);
-         }
-         
+            // add CheckBox, TextField, and Delete Button to HBox
+            newTaskEntry.getChildren().addAll(checkBox, textField, deleteButton);
+
+            // add new task entry to VBox
+            taskListContainer.getChildren().add(taskListContainer.getChildren().size() - 3, newTaskEntry);
+        }
+
     }
 
     @FXML
     private void handleCancel() throws IOException {
-        App.setRoot("primaryMenu");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("primaryMenu.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public ToDoList parseClass(String input) {
@@ -189,8 +200,6 @@ public class EditListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-         
 
     }
 }
