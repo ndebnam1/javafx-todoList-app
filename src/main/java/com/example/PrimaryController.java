@@ -2,7 +2,6 @@ package com.example;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.classfile.attribute.SourceIDAttribute;
 import java.net.URL;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -17,10 +16,11 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.chart.BubbleChart;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -31,7 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
     public ArrayList<ToDoList> lists = new ArrayList<>();
@@ -80,7 +80,6 @@ public class PrimaryController implements Initializable {
             displayLists();
         });
 
-
         try {
             loadLists();
             displayLists();
@@ -89,7 +88,6 @@ public class PrimaryController implements Initializable {
             e.printStackTrace();
         }
 
-              
     }
 
     public ToDoList parseClass(String input) {
@@ -140,7 +138,7 @@ public class PrimaryController implements Initializable {
         listContainer.getChildren().clear();
         listContainer.setPadding(new Insets(25));
         listContainer.setAlignment(javafx.geometry.Pos.CENTER);
-        
+
         String searchQuery = (tagField != null && tagField.getText() != null) ? tagField.getText().trim().toLowerCase()
                 : "";
 
@@ -227,27 +225,45 @@ public class PrimaryController implements Initializable {
         }
     }
 
-    
+    @FXML
+    public void handleEdit() throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("editList.fxml"));
+        Parent root = loader.load();
+        EditListController editListController = loader.getController();
+        String listName;
+
+        if (selectedCard != null) {
+            listName = ((Label) selectedCard.getChildren().get(0)).getText();
+            System.out.println("Selected List to pass to edit: " + listName);
+            editListController.setListFileName(listName);
+            editListController.displayEntries();
+            Stage stage = (Stage) editBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+            
+        }
+
+    }
+
     public void showDeleteConfirmation(String listName) {
         Path pathToToDoLists = Paths.get("todolist_files");
-    File file = new File(pathToToDoLists.toString(), listName + ".txt");
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Confirm Deletion");
-    alert.setHeaderText(null); // optional
-    alert.setContentText("Are you sure you want to delete the list \"" + listName + "\"?");
+        File file = new File(pathToToDoLists.toString(), listName + ".txt");
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText(null); // optional
+        alert.setContentText("Are you sure you want to delete the list \"" + listName + "\"?");
 
-    // Show the alert and wait for user response
-    Optional<ButtonType> result = alert.showAndWait();
+        // Show the alert and wait for user response
+        Optional<ButtonType> result = alert.showAndWait();
 
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-        file.delete();
-        editBtn.setDisable(true);
-        deleteBtn.setDisable(true);
-         
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            file.delete();
+            editBtn.setDisable(true);
+            deleteBtn.setDisable(true);
 
-    } else {
-        displayLists();
+        } else {
+            displayLists();
+        }
     }
-}
 
 }

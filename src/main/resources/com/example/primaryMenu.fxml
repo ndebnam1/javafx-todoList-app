@@ -18,7 +18,7 @@
             <HBox alignment="CENTER" prefHeight="35.0" spacing="10.0">
                <children>
                   <Button minWidth="100.0" mnemonicParsing="false" onAction="#goToCreateList" text="Create List" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="editBtn" minWidth="100.0" mnemonicParsing="false" text="Edit " HBox.hgrow="ALWAYS" />
+                  <Button fx:id="editBtn" minWidth="100.0" mnemonicParsing="false" onAction="#handleEdit" text="Edit " HBox.hgrow="ALWAYS" />
                   <Button fx:id="deleteBtn" minWidth="100.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>

@@ -30,4 +30,10 @@ public class ListEntry {
         this.text = text;
     }
 
+
+    @Override
+    public String toString() {
+        return "Completed: " + isComplete + " - " + text;
+    }
+
 }
