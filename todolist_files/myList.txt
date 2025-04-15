@@ -1,7 +1,10 @@
 name: myList
-tag: null
-dateCreated: 2025-03-30
+tag: school
+dateCreated: 2025-04-15
 items: 
 test - Completed
-t - Pending
+homework - Pending
+walk dog - Pending
+schedule - Completed
+ - Pending
 

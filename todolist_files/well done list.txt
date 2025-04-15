@@ -1,0 +1,12 @@
+name: well done list
+tag: proud of myself
+dateCreated: 2025-04-15
+items: 
+fasd - Completed
+hahahah - Completed
+ - Completed
+asdfsdafasdfasdf - Pending
+asdfasdf - Pending
+ - Pending
+ - Completed
+

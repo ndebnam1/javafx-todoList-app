@@ -159,7 +159,7 @@ public class PrimaryController implements Initializable {
 
                 if (card.equals(selectedCard)) {
                     card.setStyle(
-                            "-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4); -fx-cursor: hand;");
+                            "-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4); -fx-cursor: pointer;");
                     selectedCard = null;
                     editBtn.setDisable(true);
                     deleteBtn.setDisable(true);
