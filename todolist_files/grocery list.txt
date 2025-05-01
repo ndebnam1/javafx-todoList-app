@@ -1,0 +1,11 @@
+name: grocery list
+tag: food
+dateCreated: 2025-05-01
+items: 
+eggs - Completed
+bread - Pending
+tortilla - Completed
+rice - Pending
+candy - Pending
+apple juice - Completed
+

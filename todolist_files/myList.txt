@@ -1,10 +1,9 @@
 name: myList
 tag: school
-dateCreated: 2025-04-15
+dateCreated: 2025-05-01
 items: 
 test - Completed
 homework - Pending
 walk dog - Pending
 schedule - Completed
- - Pending
 

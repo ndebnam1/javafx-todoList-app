@@ -1,0 +1,10 @@
+name: newList
+tag: test
+dateCreated: 2025-05-01
+items: 
+this - Completed
+list - Pending
+is - Completed
+a - Pending
+test - Completed
+

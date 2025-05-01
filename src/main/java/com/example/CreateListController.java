@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class CreateListController {
 
@@ -63,7 +66,10 @@ public class CreateListController {
 
     @FXML
     private void handleCancel() throws IOException {
-        App.setRoot("primaryMenu");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/primaryMenu.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.setScene(scene);
     }
 
     @FXML
@@ -121,8 +127,10 @@ public class CreateListController {
         }
         list.saveToFile();
         System.out.println(list);
-        App.setRoot("primaryMenu");
-        
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/primaryMenu.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = (Stage) createListButton.getScene().getWindow();
+        stage.setScene(scene); 
     }
 
 

@@ -43,13 +43,18 @@ public class PrimaryController implements Initializable {
     private Button deleteBtn;
     @FXML
     private FlowPane listContainer;
+    @FXML
+    private Button createListBtn;
 
     @FXML
     private TextField tagField;
 
     @FXML
     private void goToCreateList() throws IOException {
-        App.setRoot("createList");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/createList.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = (Stage) createListBtn.getScene().getWindow();
+        stage.setScene(scene);
     }
 
     // used to read the content of the txt file and parse it into a ToDoList
@@ -171,7 +176,7 @@ public class PrimaryController implements Initializable {
                     selectedCard = card;
 
                     card.setStyle(
-                            "-fx-background-color: #cce5ff; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 6); -fx-cursor: hand;");
+                            "-fx-background-color: #ebe3e3; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 6); -fx-cursor: hand;");
 
                     System.out.println("Card: " + list);
                     editBtn.setDisable(false);
@@ -240,7 +245,7 @@ public class PrimaryController implements Initializable {
             Stage stage = (Stage) editBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-             
+
         }
 
     }
@@ -265,5 +270,4 @@ public class PrimaryController implements Initializable {
             displayLists();
         }
     }
-
 }

@@ -1,0 +1,10 @@
+name: dog
+tag: dog
+dateCreated: 2025-05-01
+items: 
+dog food - Pending
+trainiing - Completed
+impulse control - Completed
+sleep - Completed
+crate train - Completed
+

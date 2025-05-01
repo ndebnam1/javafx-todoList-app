@@ -1,0 +1,21 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "App",
+			"request": "launch",
+			"mainClass": "com.example/com.example.App",
+			"projectName": "todo_app"
+		},
+		{
+			"type": "java",
+			"name": "Run JavaFX via Maven",
+			"request": "launch",
+			"mainClass": "",
+			"projectName": "todo_app",
+			"preLaunchTask": "Run Maven JavaFX",
+			"console": "integratedTerminal"
+		}
+	]
+}

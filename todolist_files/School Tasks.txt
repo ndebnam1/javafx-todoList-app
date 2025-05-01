@@ -1,0 +1,8 @@
+name: School Tasks
+tag: school
+dateCreated: 2025-05-01
+items: 
+math hw - Completed
+study for finals - Pending
+push final project to github - Completed
+
